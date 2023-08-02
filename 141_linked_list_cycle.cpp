@@ -9,6 +9,37 @@ struct ListNode	{
 		ListNode(int x): val(x), next(NULL)	{}
 };
 
+class SingleList {
+	ListNode* head;
+	public:
+		SingleList() {head=nullptr;};
+		/** https://shengyu7697.github.io/cpp-nullptr/ **/
+
+		void PrintList() {
+			ListNode* temp = head;
+			while(temp!=nullptr){
+				std::cout << temp-> val << "\n";
+				temp = temp -> next;
+			}
+		};
+
+		void Insert(int value) {
+			ListNode* new_node = new ListNode(value);
+			if (head == nullptr){
+				head = new_node;
+				return;
+			}
+			ListNode* temp  = head;
+			while(temp -> next != nullptr){
+				temp = temp -> next;
+			}	
+			temp -> next = new_node;
+		};
+
+		/**void Delete(int node_number) {
+		};**/
+};
+
 int main()	{
 	ListNode ln1(1);
 	ListNode* ln2;
@@ -22,5 +53,9 @@ int main()	{
 	std::cout << ln2 << "\n";
 	std::cout << ln3 -> val << "\n";
 	std::cout << ln3 -> next << "\n";
+	SingleList sl;
+	sl.Insert(1);
+	sl.Insert(2);
+	sl.PrintList();
 	return 0;
 }
