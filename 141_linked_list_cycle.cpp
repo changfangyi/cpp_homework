@@ -13,7 +13,7 @@ class SingleList {
 	ListNode* head;
 	public:
 		SingleList() {head=nullptr;};
-		/** https://shengyu7697.github.io/cpp-nullptr/ **/
+		/** https://shengy u7697.github.io/cpp-nullptr/ **/
 
 		void PrintList() {
 			ListNode* temp = head;
@@ -23,39 +23,52 @@ class SingleList {
 			}
 		};
 
-		void Insert(int value) {
-			ListNode* new_node = new ListNode(value);
-			if (head == nullptr){
-				head = new_node;
-				return;
-			}
-			ListNode* temp  = head;
-			while(temp -> next != nullptr){
-				temp = temp -> next;
-			}	
-			temp -> next = new_node;
-		};
-
-		/**void Delete(int node_number) {
-		};**/
 };
 
-int main()	{
-	ListNode ln1(1);
-	ListNode* ln2;
-	struct ListNode* ln3 = (struct ListNode*) malloc(sizeof(struct ListNode));
-	/** The three ways can initialize the ListNode structure **/
-
-	std::cout << ln1.next << "\n";
-	ln1.next = ln2; /** This change the ln1's next pointer **/
-	std::cout << ln1.val << "\n";
-	std::cout << ln1.next << "\n";
-	std::cout << ln2 << "\n";
-	std::cout << ln3 -> val << "\n";
-	std::cout << ln3 -> next << "\n";
-	SingleList sl;
-	sl.Insert(1);
-	sl.Insert(2);
-	sl.PrintList();
-	return 0;
+bool hasCycle(ListNode* head){
+	ListNode* fast = head;
+	ListNode* slow = head;
+	while (fast && fast -> next){
+		slow = slow ->next;
+		fast = fast -> next -> next;
+		if (slow==fast) return true;
+	}
+	return false;
 }
+
+int main() {
+	std::cout << "Here is the given sequence 1, 2, 3, 4, 5, which is not cycle" << "\n";
+	ListNode ln1(1);
+	ListNode ln2(2);
+	ListNode ln3(3);
+	ListNode ln4(4);
+	ListNode ln5(5);
+	ln1.next = &ln2;
+	ln2.next = &ln3;
+	ln3.next = &ln4;
+	ln4.next = &ln5;
+	ln5.next = nullptr;
+	std::cout << ln1.next << "\n";
+	std::cout << &ln2 << "\n";
+	std::cout << ln2.next << "\n";
+	std::cout << &ln3 << "\n";
+	std::cout << ln3.next << "\n";
+	std::cout << &ln4 << "\n";
+	std::cout << ln4.next << "\n";
+	std::cout << &ln5 << "\n";
+	std::cout << ln5.next << "\n";
+	std::cout <<  "The seq is not cycle:" << hasCycle(&ln1) << "\n";
+	std::cout << "Here is the given sequence 6, 7, 8, 9, 6, which is  cycle" << "\n";
+	ListNode ln6(6);
+	ListNode ln7(7);
+	ListNode ln8(8);
+	ListNode ln9(9);
+	ln6.next = &ln7;
+	ln7.next = &ln8;
+	ln8.next = &ln9;
+	ln9.next = &ln6;
+	std::cout << ln9.next << "\n";
+	std::cout << &ln6 << "\n";
+	std::cout <<  "The seq is cycle:" << hasCycle(&ln6) << "\n";
+}
+
