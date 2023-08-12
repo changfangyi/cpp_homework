@@ -13,6 +13,7 @@ class Solution {
 				for (int j=0; j<n; j++) {
 					rows[i] |= (matrix[i][j]==0);
 					cols[j] |= (matrix[i][j]==0);
+					// foo |= bar <=> foo = (foo | bar) 
 				}
 			}
 			for (int i=0; i<m; i++) {
